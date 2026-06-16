@@ -19,9 +19,9 @@ export const siteConfig = {
   name: "Nikolay Nanov Consulting",
   founder: "Nikolay Nanov",
   legalName: "Nikolay Nanov Consulting",
-  location: "Sofia, Bulgaria",
+  location: "Veliko Tarnovo, Bulgaria",
   region: "Bulgaria and EU",
-  email: "hello@nikolaynanov.com",
+  email: "nickolaynanov17@gmail.com",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nikolaynanov.com",
   description:
     "Bulgaria-based software consulting for companies that need reliable web applications, business automation, internal tools, and practical technical leadership.",

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
-import { siteConfig, structuredData } from "@/data/site";
+import { defaultLocale, getStructuredData, isLocale } from "@/data/i18n";
+import { siteConfig } from "@/data/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -48,30 +50,33 @@ export const metadata: Metadata = {
     images: ["/consulting-workflow-hero.png"],
   },
   alternates: {
-    canonical: "/",
+    canonical: "/en",
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const localeHeader = (await headers()).get("x-locale");
+  const locale = localeHeader && isLocale(localeHeader) ? localeHeader : defaultLocale;
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(getStructuredData(locale)).replace(/</g, "\\u003c"),
           }}
         />
-        <SiteHeader />
+        <SiteHeader locale={locale} />
         <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <SiteFooter locale={locale} />
       </body>
     </html>
   );

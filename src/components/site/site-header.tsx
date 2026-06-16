@@ -27,6 +27,7 @@ export function SiteHeader({ locale = "en" }: { locale?: Locale }) {
   const alternateLocale = locale === "en" ? "bg" : "en";
   const alternatePath = pathname?.replace(/^\/(en|bg)/, "") || "";
   const switchHref = localizeHref(alternateLocale, alternatePath || "/");
+  const navigationItems = dictionary.nav.filter((item) => item.href !== "/work");
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/92 backdrop-blur supports-[backdrop-filter]:bg-background/78">
@@ -50,7 +51,7 @@ export function SiteHeader({ locale = "en" }: { locale?: Locale }) {
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
-          {dictionary.nav.map((item) => (
+          {navigationItems.map((item) => (
             <Link
               key={item.href}
               href={localizeHref(locale, item.href)}
@@ -93,7 +94,7 @@ export function SiteHeader({ locale = "en" }: { locale?: Locale }) {
                 <SheetTitle>{siteConfig.name}</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-1 px-4" aria-label="Mobile navigation">
-                {dictionary.nav.map((item) => (
+                {navigationItems.map((item) => (
                   <SheetClose key={item.href} asChild>
                     <Link
                       href={localizeHref(locale, item.href)}

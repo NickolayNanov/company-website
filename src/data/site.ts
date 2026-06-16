@@ -22,7 +22,7 @@ export const siteConfig = {
   location: "Veliko Tarnovo, Bulgaria",
   region: "Bulgaria and EU",
   email: "nickolaynanov17@gmail.com",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nikolaynanov.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nikolaynanovconsulting.vercel.app",
   description:
     "Bulgaria-based software consulting for companies that need reliable web applications, business automation, internal tools, and practical technical leadership.",
   keywords: [
